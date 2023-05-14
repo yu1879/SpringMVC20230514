@@ -9,5 +9,6 @@
 </head>
 <body>
 	<%=new Date()%>
+	Hello
 </body>
 </html>
