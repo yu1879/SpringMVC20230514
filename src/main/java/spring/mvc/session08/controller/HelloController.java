@@ -107,12 +107,11 @@ public class HelloController {
 	public String any() {
 		return "Any";
 	}
-	@RequestMapping(value = "/stuent/{name:[a-z]+}-{age:\\d+}")
+
+	@RequestMapping(value = "/student/{name:[a-z]+}-{age:\\d+}")
 	@ResponseBody
-	public String student(
-			@PathVariable("name") String name,
-			@ PathVariable("age")Integer age) {
-		return name+":"+age;
+	public String student(@PathVariable("name") String name, @PathVariable("age") Integer age) {
+		return name + ":" + age;
 	}
 
 }
