@@ -2,6 +2,7 @@ package spring.mvc.session08.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -13,4 +14,13 @@ public class HelloController {
 	public String welcome() {
 		return "Welcome Spring MVC!";
 	}
+
+	@RequestMapping(value = "/sayhi")
+	@ResponseBody
+	public String sayHi(@RequestParam(value = "name") String name, @RequestParam(value = "age") Integer age) {
+
+		String data = String.format("Hi %s, %d", name, age);
+		return data;
+	}
+
 }
