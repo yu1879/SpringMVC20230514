@@ -81,7 +81,7 @@ public class HelloController {
 	@ResponseBody
 	public String getJavaExam(@PathVariable("score") Integer score) {
 
-		return String.format("Java :%d %s,", score, (score >= 60) ? "pass" : "fail");
+		return String.format("Java :%d %s", score, (score >= 60) ? "pass" : "fail");
 	}
 
 	@RequestMapping(value = "/calc/{exp}")
