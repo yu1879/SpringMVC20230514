@@ -84,4 +84,22 @@ public class HelloController {
 		return String.format("Java :%d %s,", score, (score >= 60) ? "pass" : "fail");
 	}
 
+	@RequestMapping(value = "/calc/{exp}")
+	@ResponseBody
+	public String calc(@PathVariable("exp") String exp,
+			@RequestParam(value = "x", required = false, defaultValue = "0") Integer x,
+			@RequestParam(value = "y", required = false, defaultValue = "0") Integer y) {
+		int result = 0;
+		switch (exp) {
+		case "add":
+			result = x + y;
+			break;
+		case "sub":
+			result = x - y;
+			break;
+
+		}
+		return String.format("Result :%d", result);
+	}
+
 }
