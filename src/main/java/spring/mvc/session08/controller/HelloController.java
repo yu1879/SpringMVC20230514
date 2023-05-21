@@ -102,4 +102,10 @@ public class HelloController {
 		return String.format("Result :%d", result);
 	}
 
+	@RequestMapping(value = "/any/*/java?")
+	@ResponseBody
+	public String any() {
+		return "Any";
+	}
+
 }
