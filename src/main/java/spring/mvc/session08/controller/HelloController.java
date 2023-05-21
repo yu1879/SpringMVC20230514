@@ -2,6 +2,7 @@ package spring.mvc.session08.controller;
 
 import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +58,13 @@ public class HelloController {
 
 		return String.format("最高分:%d 最低分:%d 平均:%.1f 總分:%d", stat.getMax(), stat.getMin(), stat.getAverage(),
 				stat.getSum());
+	}
+
+	@RequestMapping(value = "/person")
+	@ResponseBody
+	public String getPerson(@RequestParam("score") Map<String, String> personMap) {
+
+		return personMap.toString();
 	}
 
 }
