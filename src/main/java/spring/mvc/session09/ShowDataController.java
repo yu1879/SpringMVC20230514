@@ -15,7 +15,7 @@ public class ShowDataController {
 	public ModelAndView case1() {
 		String data = new Date() + "";
 
-		String view = "clock.jsp";
+		String view = "/clock.jsp";
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("data", data);
 		mav.setViewName(view);
