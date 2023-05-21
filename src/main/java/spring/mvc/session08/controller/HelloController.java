@@ -43,7 +43,9 @@ public class HelloController {
 	@RequestMapping("/age")
 	@ResponseBody
 	public String getAvgOfAge(@RequestParam("age") List<Integer> ages) {
-		double avg = ages.stream().mapToInt(Integer::intValue).average().getAsDouble();
+		double avg = ages.stream().mapToInt(age -> age.intValue())
+//				mapToInt(Integer::intValue)
+				.average().getAsDouble();
 		return String.format("avg=%.1f", avg);
 	}
 
