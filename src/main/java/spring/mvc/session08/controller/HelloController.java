@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import spring.mvc.session08.entity.User;
 
 @Controller
 @RequestMapping(value = "/hello")
@@ -65,6 +68,20 @@ public class HelloController {
 	public String getPerson(@RequestParam("score") Map<String, String> personMap) {
 
 		return personMap.toString();
+	}
+
+	@RequestMapping(value = "/user")
+	@ResponseBody
+	public String getUser(User user) {
+
+		return user.toString();
+	}
+
+	@RequestMapping(value = "/javaexam/{score}")
+	@ResponseBody
+	public String getJavaExam(@PathVariable("score") Integer score) {
+
+		return String.format("Java :%d %s,", score, (score >= 60) ? "pass" : "fail");
 	}
 
 }
