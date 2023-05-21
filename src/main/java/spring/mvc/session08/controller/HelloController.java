@@ -1,5 +1,6 @@
 package spring.mvc.session08.controller;
 
+import java.util.IntSummaryStatistics;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -47,6 +48,15 @@ public class HelloController {
 //				mapToInt(Integer::intValue)
 				.average().getAsDouble();
 		return String.format("avg=%.1f", avg);
+	}
+
+	@RequestMapping(value = "/exam", produces = { "text/plain;charset=utf-8" })
+	@ResponseBody
+	public String getExamInfo(@RequestParam("score") List<Integer> scores) {
+		IntSummaryStatistics stat = scores.stream().mapToInt(Integer::intValue).summaryStatistics();
+
+		return String.format("最高分:%d 最低分:%d 平均:%.1f 總分:%d", stat.getMax(), stat.getMin(), stat.getAverage(),
+				stat.getSum());
 	}
 
 }
