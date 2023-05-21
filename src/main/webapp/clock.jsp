@@ -8,7 +8,7 @@
 </head>
 <body style="padding: 10px">
 	<img alt="100"
-		src="${pageContext.request.servletContext }/images/clock.png">
+		src="${pageContext.request.contextPath }/images/clock.png">
 	<p>
 	<h1>現在時刻:${data}</h1>
 </body>
