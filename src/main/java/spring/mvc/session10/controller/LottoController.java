@@ -48,6 +48,14 @@ public class LottoController {
 
 	}
 
+	@GetMapping("/update/{row_index}/{col_index}")
+	public String update(@PathVariable("row_index") int rowIndex, @PathVariable("col_index") int colIndex) {
+
+		lottoService.update(rowIndex, colIndex); // attr.addFlashAttribute("lotto", lotto);
+		return "redirect:../../";
+
+	}
+
 	@GetMapping("/delete/{index}")
 	public String delete(@PathVariable("index") int index) {
 
