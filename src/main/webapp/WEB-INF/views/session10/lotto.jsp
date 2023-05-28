@@ -22,7 +22,7 @@
 		</fieldset>
 	</form>
 	<!-- 最新電腦選號 -->
-	<div>最新電腦選號：${ params.lotto }</div>
+	<div>最新電腦選號：${ param.lotto }</div>
 	<div>最新電腦選號：${ lottos }</div>
 
 </body>
