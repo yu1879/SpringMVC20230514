@@ -33,8 +33,8 @@ public class LottoController {
 	public String add(Model model, RedirectAttributes attr) {
 
 		Set<Integer> lotto = lottoService.add();
-		// model.addAttribute("lotto", lotto);
-		attr.addFlashAttribute("lotto", lotto);
+		attr.addAttribute("lotto", lotto);
+		// attr.addFlashAttribute("lotto", lotto);
 		return "redirect:./";
 
 	}
