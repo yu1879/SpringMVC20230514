@@ -3,9 +3,13 @@ package spring.mvc.session10.service;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.function.Function;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.sql.RowSet;
 
@@ -42,6 +46,14 @@ public class LottoService {
 
 	public void delete(int index) {
 		lottos.remove(index);
+	}
+
+	public Map<Integer, Long> getLottoStatistics() {
+		List<Integer> nums = lottos.stream().flatMap(lotto -> lotto.stream()).collect(Collectors.toList());
+
+		Map<Integer, Long> stat = nums.stream()
+				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+		return stat;
 	}
 
 	public void update(int rowIndex, int columnIndex) {
