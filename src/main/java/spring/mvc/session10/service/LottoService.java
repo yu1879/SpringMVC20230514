@@ -33,4 +33,12 @@ public class LottoService {
 		return lotto;
 	}
 
+	public void update(int index) {
+		lottos.set(index, getRandomLotto());
+	}
+
+	public void delete(int index) {
+		lottos.remove(index);
+	}
+
 }
