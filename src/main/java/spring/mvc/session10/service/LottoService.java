@@ -6,6 +6,9 @@ import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class LottoService {
 	private List<Set<Integer>> lottos = new CopyOnWriteArrayList<>();
 
