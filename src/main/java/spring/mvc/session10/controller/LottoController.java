@@ -44,7 +44,7 @@ public class LottoController {
 	public String update(@PathVariable("index") int index) {
 
 		lottoService.update(index); // attr.addFlashAttribute("lotto", lotto);
-		return "redirect:./";
+		return "redirect:../";
 
 	}
 
@@ -52,7 +52,7 @@ public class LottoController {
 	public String delete(@PathVariable("index") int index) {
 
 		lottoService.delete(index); // attr.addFlashAttribute("lotto", lotto);
-		return "redirect:./";
+		return "redirect:../";
 
 	}
 }
