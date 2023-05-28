@@ -18,7 +18,7 @@ public class ShowDataController {
 	public ModelAndView case1() {
 		String data = new Date() + "";
 
-		String view = "sesseion09/clock";
+		String view = "session09/clock";
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("data", data);
 		mav.setViewName(view);
@@ -29,7 +29,7 @@ public class ShowDataController {
 	public String case2(Model model) {
 		String data = new Date() + "";
 		model.addAttribute("data", data);
-		return "sesseion09/clock";
+		return "session09/clock";
 
 	}
 }
