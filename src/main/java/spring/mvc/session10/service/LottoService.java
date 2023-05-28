@@ -1,6 +1,7 @@
 package spring.mvc.session10.service;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 
 import javax.sql.RowSet;
 
+import org.apache.catalina.tribes.tipis.AbstractReplicatedMap.MapEntry;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -53,7 +55,11 @@ public class LottoService {
 
 		Map<Integer, Long> stat = nums.stream()
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-		return stat;
+		Map<Integer, Long> statAndSort = new LinkedHashMap<>();
+		stat.entrySet().stream().sorted(Map.Entry.<Integer, Long>comparingByValue().reversed())
+				.forEachOrdered(e -> statAndSort.put(e.getKey(), e.getValue()));
+		return statAndSort;
+
 	}
 
 	public void update(int rowIndex, int columnIndex) {
