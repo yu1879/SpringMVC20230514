@@ -25,6 +25,7 @@ public class LottoController {
 
 		List<Set<Integer>> lottos = lottoService.querAll();
 		model.addAttribute("lottos", lottos);
+		model.addAttribute("stat", lottoService.getLottoStatistics());
 
 		return "session10/lotto";
 
