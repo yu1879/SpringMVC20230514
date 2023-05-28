@@ -23,7 +23,7 @@
 	</form>
 	<!-- 最新電腦選號 -->
 	<div>最新電腦選號：${ param.lotto }</div>
-	<div>最新電腦選號：${ lottos }</div>
+	<div>歷史電腦選號：${ lottos }</div>
 
 </body>
 </html>
