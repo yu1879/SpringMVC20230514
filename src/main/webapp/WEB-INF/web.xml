@@ -13,6 +13,7 @@
 		<welcome-file>default.htm</welcome-file>
 	</welcome-file-list>
 
+	<!-- 部署 DispatcherServlet -->
 	<servlet>
 		<servlet-name>springmvc</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -22,10 +23,14 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+
+	<!-- 受 mvc 管轄的路徑 -->
 	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
 		<url-pattern>/mvc/*</url-pattern>
 	</servlet-mapping>
+
+	<!-- 中文支援 -->
 	<filter>
 		<filter-name>springUtf8Encoding</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -43,4 +48,13 @@
 		<url-pattern>/mvc/*</url-pattern>
 	</filter-mapping>
 
+	<!-- HiddenHttpMethodFilter -->
+	<filter>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>HiddenHttpMethodFilter</filter-name>
+		<url-pattern>/mvc/*</url-pattern>
+	</filter-mapping>
 </web-app>
