@@ -5,13 +5,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="spform"
 	uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <link rel="stylesheet"
 	href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>User Form</title>
 </head>
 <body>
 
