@@ -8,7 +8,7 @@
 <title>Index</title>
 </head>
 <body>
-	<%=new Date()%>
-	Hello
+	Session 11:
+	<a href="${pageContext.request.contextPath}/mvc/session11/user/">/mvc/session11/user/</a>
 </body>
 </html>

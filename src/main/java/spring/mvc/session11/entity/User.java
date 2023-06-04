@@ -1,6 +1,10 @@
 package spring.mvc.session11.entity;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -10,23 +14,36 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class User {
 	private String name;
 	private Integer age;
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
 	private Date birth;
+
 	private String education;
 	private String sex;
 	private String[] interest;
 	private String resume;
 
 	public User() {
-		super();
+
 	}
 
-	public User(String name, Integer age, Date birth, String education, String sex, String[] interest, String resume) {
-		super();
+	public User(String name, String birthStr, String education, String sex, String[] interest, String resume) {
 		this.name = name;
-		this.age = age;
-		this.birth = birth;
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.birth = sdf.parse(birthStr);
+
+			LocalDate birth = LocalDate.parse(birthStr);
+			LocalDate today = LocalDate.now();
+			Period period = Period.between(birth, today);
+			int yearsOld = period.getYears();
+			this.age = yearsOld;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		this.education = education;
 		this.sex = sex;
 		this.interest = interest;
