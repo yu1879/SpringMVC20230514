@@ -35,7 +35,7 @@ public class UserController {
 	@PostMapping("/")
 	public String add(@ModelAttribute User user) {
 		users.add(user);
-		return "redirect./";
+		return "redirect:./";
 	}
 
 }
