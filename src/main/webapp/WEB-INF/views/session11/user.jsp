@@ -13,17 +13,24 @@
 	href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
 <meta charset="UTF-8">
 <title>User Form</title>
+<style type="text/css">
+.checkbox-group, .radio-group {
+	margin-right: 2px;
+	margin-left: 5px
+}
+</style>
 </head>
 <body style="padding: 15px">
 
 	<table>
 		<tr>
 			<td valign="top" style="padding: 5px">
-				 <spform:form class="pure-form" method="post"
+				<!-- User form --> <spform:form class="pure-form" method="post"
 					modelAttribute="user"
 					action="${pageContext.request.contextPath}/mvc/session11/user/${ index }">
 					<fieldset>
 						<legend>User Form</legend>
+						<!-- User 表單元素 -->
 						姓名：
 						<spform:input path="name" />
 						<p />
@@ -36,27 +43,24 @@
 						學歷：
 						<spform:select path="education">
 							<spform:option value="">請選擇</spform:option>
-							<spform:options items="${ educationList }" />
+							<spform:options items="${ dataMap['educationList'] }" />
 						</spform:select>
 						<p />
 						性別：
-						<spform:radiobuttons path="sex" items="${sexList }"/>
+						<spform:radiobuttons path="sex" items="${ dataMap.sexList }"
+							cssClass="radio-group" />
 						<p />
 						興趣：
-						<spform:checkbox path="interest" value="爬山" />
-						爬山
-						<spform:checkbox path="interest" value="看書" />
-						看書
-						<spform:checkbox path="interest" value="打球" />
-						打球
-						<spform:checkbox path="interest" value="飛控" />
-						飛控
+						<spform:checkboxes path="interest"
+							items="${ dataMap.interestList }" cssClass="checkbox-group" />
 						<p />
 						履歷：
 						<spform:textarea path="resume" />
 						<p />
+						<!-- 自訂表單元素 -->
 						<input type="hidden" name="_method" id="_method"
 							value="${ _method }">
+						<!-- 操作按鈕 -->
 						<button type="submit" class="pure-button pure-button-primary">
 							${ submitButtonName }</button>
 					</fieldset>
