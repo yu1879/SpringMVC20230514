@@ -21,7 +21,7 @@
 			<td valign="top" style="padding: 5px">
 				<!-- User form --> <spform:form class="pure-form" method="post"
 					modelAttribute="user"
-					action="${pageContext.request.contextPath}/mvc/session11/user/">
+					action="${pageContext.request.contextPath}/mvc/session11/user/${ index }">
 					<fieldset>
 						<legend>User Form</legend>
 						<!-- User 表單元素 -->
@@ -106,10 +106,14 @@
 										<td nowrap>${ fn:join(user.interest, " ")}</td>
 										<td nowrap>${ user.resume }</td>
 										<td nowrap>
-											<button type="button" onclick="" class="pure-button">修改</button>
+											<button type="button"
+												onclick="window.location.href='${pageContext.request.contextPath}/mvc/session11/user/${ status.index }?action=update';"
+												class="pure-button">修改</button>
 										</td>
 										<td nowrap>
-											<button type="button" onclick="" class="pure-button">刪除</button>
+											<button type="button"
+												onclick="window.location.href='${pageContext.request.contextPath}/mvc/session11/user/${ status.index }?action=delete';"
+												class="pure-button">刪除</button>
 										</td>
 									</tr>
 								</c:forEach>
