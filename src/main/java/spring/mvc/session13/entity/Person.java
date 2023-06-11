@@ -13,19 +13,19 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Person {
-	@NotEmpty(message = "姓名不可以是空值")
-	@Size(min = 2, max = 50, message = "姓名必須介於{min}~{max}個字之間")
+	@NotEmpty(message = "{person.name.empty}")
+	@Size(min = 2, max = 50, message = "{person.name.size}")
 	private String name;
-	@NotNull(message = "年齡不可以是空值")
-	@Range(min = 18, max = 99, message = "年齡必須介於{min}~{max}歲之間")
+	@NotNull(message = "{person.age.null}")
+	@Range(min = 18, max = 99, message = "{person.age.range}")
 	private Integer age;
-	@NotNull(message = "會員設定不可以是空值")
+	@NotNull(message = "{person.member.null}")
 
 	private Boolean member;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-	@NotNull(message = "生日日期設定不可以是空值")
-	@Past(message = "生日不可以大於現在日期")
+	@NotNull(message = "{person.birth.null}")
+	@Past(message = "{person.birth.past}")
 	private Date birth;
 
 	public String getName() {
