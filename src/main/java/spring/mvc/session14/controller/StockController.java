@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.github.javafaker.Stock;
-
+import spring.mvc.session14.entity.Stock;
 import spring.mvc.session14.validator.StockValidator;
 
 @Controller
