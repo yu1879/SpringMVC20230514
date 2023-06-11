@@ -1,7 +1,9 @@
 package spring.mvc.session14.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -27,6 +29,7 @@ public class StockController {
 	@GetMapping("/")
 	public String index(Model model, @ModelAttribute Stock stock) {
 		model.addAttribute("stocks", stocks);
+		model.addAttribute("avgCosts", getAvgCosts());
 
 		return "session14/stock";
 	}
@@ -41,6 +44,13 @@ public class StockController {
 
 		stocks.add(stock);
 		return "rediret:./";
+
+	}
+
+	private Map<String, Double> getAvgCosts() {
+		Map<String, Double> averageCosts = stocks.stream().collect(
+				Collectors.groupingBy(Stock::getSymbol, Collectors.averagingDouble(s -> s.getPrice() * s.getAmount())));
+		return averageCosts;
 
 	}
 
