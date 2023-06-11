@@ -3,12 +3,14 @@ package spring.mvc.session14.validator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import spring.mvc.session14.entity.Stock;
 
+@Component
 public class StockValidator implements Validator {
 	private static Map<String, Double> quotes = new LinkedHashMap<>();
 	static {
@@ -34,15 +36,16 @@ public class StockValidator implements Validator {
 			errors.rejectValue("symbol", "stock.symbol.notfound");
 		} else {
 			Double previousClose = quotes.get(stock.getSymbol());
-			if (stock.getPrice() < previousClose * 0.9 || stock.getPrice() > previousClose * 1.1) {
+			if (stock.getPrice() == null || stock.getPrice() < previousClose * 0.9
+					|| stock.getPrice() > previousClose * 1.1) {
 				errors.rejectValue("price", "stock.price.range",
 						new Object[] { previousClose * 0.9, previousClose * 1.1 }, "stock.price.range");
 			}
-			if (stock.getAmount() < 1000) {
+			if (stock.getAmount() == null || stock.getAmount() < 1000) {
 				errors.rejectValue("amount", "stock.amount.notenough");
 
 			}
-			if (stock.getAmount() % 1000 != 0) {
+			if (stock.getAmount() == null || stock.getAmount() % 1000 != 0) {
 				errors.rejectValue("amount", "stock.amount.notenough");
 
 			}
