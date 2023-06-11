@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
@@ -23,6 +24,8 @@ public class Person {
 	private Boolean member;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+	@NotNull(message = "生日日期設定不可以是空值")
+	@Past(message = "生日不可以大於現在日期")
 	private Date birth;
 
 	public String getName() {
