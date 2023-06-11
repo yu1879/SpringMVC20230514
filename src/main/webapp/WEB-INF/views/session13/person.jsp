@@ -44,12 +44,37 @@
 			<p />
 			<button type="sumbit" class="pure-button bure-button-primary">新增</button>
 			<p />
-			<!-- 列出所有錯誤訊息 -->
 			<spform:errors path="*" cssClass="error" />
 		</fieldset>
 	</spform:form>
 
-	${ people }
+	<table class="pure-table pure-table-bordered">
+		<thead>
+			<tr>
+				<th>index</th>
+				<th>姓名</th>
+				<th><a
+					href="${ pageContext.request.contextPath }/mvc/session13/person/?sort=asc">▲</a>
+					年齡 <a
+					href="${ pageContext.request.contextPath }/mvc/session13/person/?sort=desc">▼</a>
+				</th>
+				<th>會員</th>
+				<th>生日</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach varStatus="status" var="person" items="${ people }">
+				<tr>
+					<td>${ status.index }</td>
+					<td>${ person.name }</td>
+					<td>${ person.age }</td>
+					<td>${ (person.member)?'Y':'N' }</td>
+					<td><fmt:formatDate value="${ person.birth }"
+							pattern="yyyy-MM-dd" /></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 
 </body>
 </html>
