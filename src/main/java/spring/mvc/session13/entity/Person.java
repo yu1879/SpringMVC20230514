@@ -17,7 +17,7 @@ public class Person {
 	@Size(min = 2, max = 50, message = "姓名必須介於{min}~{max}個字之間")
 	private String name;
 	@NotNull(message = "年齡不可以是空值")
-	@Range(min = 18, max = 99, message = "年齡必須介於{min}~{max}個字之間")
+	@Range(min = 18, max = 99, message = "年齡必須介於{min}~{max}歲之間")
 	private Integer age;
 	@NotNull(message = "會員設定不可以是空值")
 
