@@ -11,7 +11,7 @@
 <link rel="stylesheet"
 	href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
 <meta charset="UTF-8">
-<title>Stock Form (Valid)</title>
+<title>Person Form (Valid)</title>
 <style type="text/css">
 .error {
 	color: #FF0000
@@ -19,29 +19,63 @@
 </style>
 </head>
 <body style="padding: 15px">
-	<spform:form class="pure-form" method="post" modelAttribute="stock"
-		action="${ pageContext.request.contextPath }/mvc/session14/stock/">
-
+	<spform:form class="pure-form" method="post" modelAttribute="person"
+		action="${ pageContext.request.contextPath }/mvc/session13/person/">
 		<fieldset>
-			<legend>Stock Form (Valid)</legend>
-			股號：
-			<spform:input path="symbol" />
-			<spform:errors path="symbol" cssClass="error" />
+			<legend>Person Form (Valid)</legend>
+			姓名：
+			<spform:input path="name" />
+			<spform:errors path="name" cssClass="error" />
 			<p />
-			價格：
-			<spform:input path="price" />
-			<spform:errors path="price" cssClass="error" />
+			年齡：
+			<spform:input path="age" />
+			<spform:errors path="age" cssClass="error" />
 			<p />
-			數量：
-			<spform:input path="amount" />
-			<spform:errors path="amount" cssClass="error" />
+			會員：
+			<spform:radiobutton path="member" value="true" />
+			會員
+			<spform:radiobutton path="member" value="false" />
+			非會員
+			<spform:errors path="member" cssClass="error" />
 			<p />
-			<button type="sumbot" class="pure-button pure-button-primary">新增</button>
+			生日：
+			<spform:input path="birth" type="date" />
+			<spform:errors path="birth" cssClass="error" />
 			<p />
-			<spform:errors path="*" />
+			<button type="sumbit" class="pure-button bure-button-primary">新增</button>
+			<p />
+			<!-- 列出所有錯誤訊息 -->
+			<spform:errors path="*" cssClass="error" />
 		</fieldset>
 	</spform:form>
 
-	${ stocks }
+	<table class="pure-table pure-table-bordered">
+		<thead>
+			<tr>
+				<th>index</th>
+				<th>姓名</th>
+				<th><a
+					href="${ pageContext.request.contextPath }/mvc/session13/person/?sort=asc">▲</a>
+					年齡 <a
+					href="${ pageContext.request.contextPath }/mvc/session13/person/?sort=desc">▼</a>
+				</th>
+				<th>會員</th>
+				<th>生日</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach varStatus="status" var="person" items="${ people }">
+				<tr>
+					<td>${ status.index }</td>
+					<td>${ person.name }</td>
+					<td>${ person.age }</td>
+					<td>${ (person.member)?'Y':'N' }</td>
+					<td><fmt:formatDate value="${ person.birth }"
+							pattern="yyyy-MM-dd" /></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+
 </body>
 </html>
