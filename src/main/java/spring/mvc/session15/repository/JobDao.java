@@ -11,9 +11,9 @@ public interface JobDao {
 
 	int update(Job job);
 
-	int delete(Integer eid);
+	int delete(Integer jid);
 
-	Job get(Integer eid);
+	Job get(Integer jid);
 
 	int getCount();
 
