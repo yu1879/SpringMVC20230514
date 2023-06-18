@@ -5,14 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import spring.mvc.session15.entity.Employee;
 import spring.mvc.session15.entity.Job;
 
 @Repository
 public class JobDaoImpl implements JobDao {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private EmployeeDao employeeDao;
 
 	@Override
 	public int add(Job job) {
@@ -52,8 +56,18 @@ public class JobDaoImpl implements JobDao {
 	@Override
 	public List<Job> query() {
 		String sql = SQLUtil.QUERY_JOB_SQL;
+
+		RowMapper<Job> rm = (rs, rowNum) -> {
+			Job job = new Job();
+			job.setJid(rs.getInt("jid"));
+			job.setJname(rs.getString("jname"));
+			job.setEid(rs.getInt("eid"));
+			Employee emp = employeeDao.get(job.getEid());
+			job.setEmployee(emp);
+			return job;
+		};
 		// TODO Auto-generated method stub
-		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Job>(Job.class));
+		return jdbcTemplate.query(sql, rm);
 	}
 
 	@Override

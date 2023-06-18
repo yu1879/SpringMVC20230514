@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Employee {
 
-	private Integer id;
+	private Integer eid;
 	@Size(min = 2, max = 50, message = "{employee.ename.size}")
 	private String ename;
 	@NotNull(message = "{employee.salary.empty}")
@@ -25,12 +25,12 @@ public class Employee {
 
 	private List<Job> jobs;
 
-	public Integer getId() {
-		return id;
+	public Integer getEid() {
+		return eid;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setEid(Integer eid) {
+		this.eid = eid;
 	}
 
 	public String getEname() {
@@ -67,7 +67,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", ename=" + ename + ", salary=" + salary + ", createtime=" + createtime
+		return "Employee [eid=" + eid + ", ename=" + ename + ", salary=" + salary + ", createtime=" + createtime
 				+ ", jobs=" + jobs + "]";
 	}
 
