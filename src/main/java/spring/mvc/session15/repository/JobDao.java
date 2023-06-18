@@ -2,9 +2,7 @@ package spring.mvc.session15.repository;
 
 import java.util.List;
 
-import com.github.javafaker.Job;
-
-import spring.mvc.session15.entity.Employee;
+import spring.mvc.session15.entity.Job;
 
 public interface JobDao {
 	int LIMIT = 5;
@@ -15,7 +13,7 @@ public interface JobDao {
 
 	int delete(Integer eid);
 
-	Employee get(Integer eid);
+	Job get(Integer eid);
 
 	int getCount();
 
