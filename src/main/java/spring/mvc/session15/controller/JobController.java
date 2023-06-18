@@ -1,5 +1,7 @@
 package spring.mvc.session15.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import spring.mvc.session15.entity.Job;
+import spring.mvc.session15.repository.EmployeeDao;
 import spring.mvc.session15.repository.JobDao;
 
 @Controller
@@ -16,6 +19,8 @@ import spring.mvc.session15.repository.JobDao;
 public class JobController {
 	@Autowired
 	private JobDao jobDao;
+	@Autowired
+	private EmployeeDao employeeDao;
 
 	private int getPageCount() {
 		int count = jobDao.getCount();
@@ -25,24 +30,52 @@ public class JobController {
 	}
 
 	@GetMapping("/")
-	public String index(@ModelAttribute Job job, Model model) {
+	public String index(@ModelAttribute Job job, Model model, HttpSession session) {
 		model.addAttribute("_method", "POST");
-		model.addAttribute("jobs", jobDao.query());
-		model.addAttribute("pageCount", getPageCount());
-
+//		model.addAttribute("jobs", jobDao.query());
+//		model.addAttribute("pageCount", getPageCount());
+		setBaseModelAttribute(model, session);
 		return "session15/job";
 	}
 
 	@GetMapping("/page/{pageNo}")
-	public String page(@PathVariable("pageNo") int pageNo, @ModelAttribute Job job, Model model) {
+	public String page(@PathVariable("pageNo") int pageNo, @ModelAttribute Job job, Model model, HttpSession session) {
 		if (pageNo < 0) {
+			session.setAttribute("num", pageNo);
 			return "redirect:../";
 		}
-
+		session.setAttribute("num", pageNo);
 		model.addAttribute("_method", "POST");
-		model.addAttribute("jobs", jobDao.queryPage(pageNo));
-		model.addAttribute("pageCount", getPageCount());
-
+//		model.addAttribute("pageCount", getPageCount());
+//		model.addAttribute("employees", employeeDao.query());
+		setBaseModelAttribute(model, session);
 		return "session15/job";
 	}
+
+	@GetMapping("{jid}")
+	public String get(@PathVariable("jid") Integer jid, Model model, HttpSession session) {
+		model.addAttribute("_method", "PUT");
+		model.addAttribute("job", jobDao.get(jid));
+
+		setBaseModelAttribute(model, session);
+
+		return "session15/job";
+
+	}
+
+	private void setBaseModelAttribute(Model model, HttpSession session) {
+		String sessionNum = session.getAttribute("num") + "";
+		if (sessionNum.length() > 0 && !sessionNum.equals("null")) {
+			int num = Integer.parseInt(sessionNum);
+			model.addAttribute("jobs", jobDao.queryPage(num));
+
+		} else {
+			model.addAttribute("jobs", jobDao.query());
+
+		}
+		model.addAttribute("pageCount", getPageCount());
+		model.addAttribute("employees", employeeDao.query());
+
+	}
+
 }

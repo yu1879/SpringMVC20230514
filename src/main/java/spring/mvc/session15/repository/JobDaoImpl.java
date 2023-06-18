@@ -74,9 +74,13 @@ public class JobDaoImpl implements JobDao {
 	public List<Job> queryPage(int pageNo) {
 		int offset = (pageNo - 1) * LIMIT;
 		String sql = SQLUtil.QUERY_PAGE_JOB_SQL;
-
-		return jdbcTemplate.query(sql, new BeanPropertyRowMapper<Job>(Job.class), LIMIT, offset);
-
+		List<Job> jobs = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Job>(Job.class), LIMIT, offset);
+		for (Job job : jobs) {
+			int eid = job.getEid();
+			Employee emp = employeeDao.get(eid);
+			job.setEmployee(emp);
+		}
+		return jobs;
 		// TODO Auto-generated method stub
 	}
 }
