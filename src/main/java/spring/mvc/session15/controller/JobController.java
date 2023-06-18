@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import spring.mvc.session15.entity.Job;
@@ -94,6 +96,25 @@ public class JobController {
 			session.setAttribute("num", getPageCount());
 		}
 		return "redirect:./";
+	}
+
+	@DeleteMapping("/")
+	public String delete(Job job, HttpSession session) {
+		Integer jid = job.getJid();
+		jobDao.delete(jid);
+
+		try {
+			int num = Integer.parseInt(session.getAttribute("num") + "");
+			int pageCount = getPageCount();
+			if (num > pageCount) {
+				session.setAttribute("num", pageCount);
+
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "redirect:./";
+
 	}
 
 	private void setBaseModelAttribute(Model model, HttpSession session) {
