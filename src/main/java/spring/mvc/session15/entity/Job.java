@@ -1,7 +1,11 @@
 package spring.mvc.session15.entity;
 
+import javax.validation.constraints.Size;
+
 public class Job {
 	private Integer jid;
+	@Size(min = 2, max = 50, message = "{job.jname.size}")
+
 	private String jname;
 	private Integer eid;
 	private Employee employee;
