@@ -81,6 +81,21 @@ public class JobController {
 		return "redirect:./";
 	}
 
+	@PutMapping("/")
+	public String update(@ModelAttribute @Valid Job job, BindingResult result, Model model, HttpSession session) {
+		if (result.hasErrors()) {
+			model.addAttribute("_method", "POST");
+			setBaseModelAttribute(model, session);
+			return "sessio15/job";
+		}
+		jobDao.add(job);
+		String sessionNum = session.getAttribute("num") + "";
+		if (sessionNum.length() > 0) {
+			session.setAttribute("num", getPageCount());
+		}
+		return "redirect:./";
+	}
+
 	private void setBaseModelAttribute(Model model, HttpSession session) {
 		String sessionNum = session.getAttribute("num") + "";
 		if (sessionNum.length() > 0 && !sessionNum.equals("null")) {
