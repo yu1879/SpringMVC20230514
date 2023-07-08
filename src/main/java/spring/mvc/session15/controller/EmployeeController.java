@@ -23,6 +23,9 @@ public class EmployeeController {
 
 	@GetMapping("/")
 	public String index(@ModelAttribute Employee employee, Model model, HttpSession session) {
+		model.addAttribute("_method", "POST");
+		setBaseModelAttribute(model, session);
+		return "session15/employee";
 
 	}
 
