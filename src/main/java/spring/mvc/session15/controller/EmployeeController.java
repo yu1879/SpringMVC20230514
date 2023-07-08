@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import spring.mvc.session15.entity.Employee;
 import spring.mvc.session15.repository.EmployeeDao;
+import spring.mvc.session15.repository.JobDao;
 
 @Controller
 @RequestMapping("/session15/employee")
 public class EmployeeController {
 	@Autowired
 	private EmployeeDao employeeDao;
+	@Autowired
+	private JobDao jobDao;
 
 	@GetMapping("/")
 	public String index(@ModelAttribute Employee employee, Model model, HttpSession session) {
@@ -34,7 +37,7 @@ public class EmployeeController {
 
 		}
 		model.addAttribute("pageCount", getPageCount());
-		model.addAttribute("employees", employeeDao.query());
+		model.addAttribute("jobs", jobDao.query());
 
 	}
 
