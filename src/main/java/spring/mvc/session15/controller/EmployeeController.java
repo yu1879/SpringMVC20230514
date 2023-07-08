@@ -31,8 +31,14 @@ public class EmployeeController {
 
 	private void setBaseModelAttribute(Model model, HttpSession session) {
 		String sessionNum = session.getAttribute("num") + "";
+		int pageCount = getPageCount();
 		if (sessionNum.length() > 0 && !sessionNum.equals("null")) {
 			int num = Integer.parseInt(sessionNum);
+			if (num > pageCount) {
+				num = pageCount;
+				session.setAttribute("num", num);
+			}
+
 			model.addAttribute("employees", employeeDao.queryPage(num));
 
 		} else {
