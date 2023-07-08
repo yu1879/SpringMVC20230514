@@ -1,15 +1,20 @@
 package spring.mvc.session15.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import spring.mvc.session15.entity.Employee;
+import spring.mvc.session15.entity.Job;
 import spring.mvc.session15.repository.EmployeeDao;
 import spring.mvc.session15.repository.JobDao;
 
@@ -27,6 +32,37 @@ public class EmployeeController {
 		setBaseModelAttribute(model, session);
 		return "session15/employee";
 
+	}
+
+	@PostMapping("/")
+	public String add(@ModelAttribute @Valid Employee employee, BindingResult result, Model model,
+			HttpSession session) {
+		if (result.hasErrors()) {
+			model.addAttribute("_method", "POST");
+			setBaseModelAttribute(model, session);
+			return "sessio15/employee";
+		}
+		employeeDao.add(employee);
+		String sessionNum = session.getAttribute("num") + "";
+		if (sessionNum.length() > 0) {
+			session.setAttribute("num", getPageCount());
+		}
+		return "redirect:./";
+	}
+
+	@PutMapping("/")
+	public String update(@ModelAttribute @Valid Job job, BindingResult result, Model model, HttpSession session) {
+		if (result.hasErrors()) {
+			model.addAttribute("_method", "POST");
+			setBaseModelAttribute(model, session);
+			return "sessio15/job";
+		}
+		jobDao.add(job);
+		String sessionNum = session.getAttribute("num") + "";
+		if (sessionNum.length() > 0) {
+			session.setAttribute("num", getPageCount());
+		}
+		return "redirect:./";
 	}
 
 	private void setBaseModelAttribute(Model model, HttpSession session) {
