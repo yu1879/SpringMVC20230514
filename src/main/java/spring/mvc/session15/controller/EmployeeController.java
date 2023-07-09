@@ -55,7 +55,7 @@ public class EmployeeController {
 		if (result.hasErrors()) {
 			model.addAttribute("_method", "POST");
 			setBaseModelAttribute(model, session);
-			return "sessio15/job";
+			return "sessio15/employee";
 		}
 		jobDao.add(job);
 		String sessionNum = session.getAttribute("num") + "";
