@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +49,17 @@ public class EmployeeController {
 			session.setAttribute("num", getPageCount());
 		}
 		return "redirect:./";
+	}
+
+	@GetMapping("{eid}")
+	public String get(@PathVariable("jid") Integer jid, Model model, HttpSession session) {
+		model.addAttribute("_method", "PUT");
+		model.addAttribute("job", jobDao.get(jid));
+
+		setBaseModelAttribute(model, session);
+
+		return "session15/employee";
+
 	}
 
 	@PutMapping("/")
