@@ -52,9 +52,9 @@ public class EmployeeController {
 	}
 
 	@GetMapping("{eid}")
-	public String get(@PathVariable("jid") Integer jid, Model model, HttpSession session) {
+	public String get(@PathVariable("eid") Integer eid, Model model, HttpSession session) {
 		model.addAttribute("_method", "PUT");
-		model.addAttribute("job", jobDao.get(jid));
+		model.addAttribute("employee", employeeDao.get(eid));
 
 		setBaseModelAttribute(model, session);
 
@@ -63,17 +63,20 @@ public class EmployeeController {
 	}
 
 	@PutMapping("/")
-	public String update(@ModelAttribute @Valid Job job, BindingResult result, Model model, HttpSession session) {
+	public String update(@ModelAttribute @Valid Employee employee, BindingResult result, Model model,
+			HttpSession session) {
 		if (result.hasErrors()) {
 			model.addAttribute("_method", "POST");
 			setBaseModelAttribute(model, session);
 			return "sessio15/employee";
 		}
-		jobDao.add(job);
+		employeeDao.add(employee);
 		String sessionNum = session.getAttribute("num") + "";
 		if (sessionNum.length() > 0) {
 			session.setAttribute("num", getPageCount());
 		}
+		employeeDao.update(employee);
+
 		return "redirect:./";
 	}
 

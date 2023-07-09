@@ -95,6 +95,7 @@ public class JobController {
 		if (sessionNum.length() > 0) {
 			session.setAttribute("num", getPageCount());
 		}
+		jobDao.update(job);
 		return "redirect:./";
 	}
 
