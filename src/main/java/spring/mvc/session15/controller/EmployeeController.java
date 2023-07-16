@@ -100,6 +100,13 @@ public class EmployeeController {
 		return "redirect:./";
 	}
 
+	private int getPageCount() {
+		int count = employeeDao.getCount();
+		int limit = employeeDao.LIMIT;
+		int pageCount = ((int) Math.ceil((double) count / limit));
+		return pageCount;
+	}
+
 	private void setBaseModelAttribute(Model model, HttpSession session) {
 		String sessionNum = session.getAttribute("num") + "";
 		int pageCount = getPageCount();
@@ -119,13 +126,6 @@ public class EmployeeController {
 		model.addAttribute("pageCount", getPageCount());
 		model.addAttribute("jobs", jobDao.query());
 
-	}
-
-	private int getPageCount() {
-		int count = employeeDao.getCount();
-		int limit = employeeDao.LIMIT;
-		int pageCount = ((int) Math.ceil((double) count / limit));
-		return pageCount;
 	}
 
 }

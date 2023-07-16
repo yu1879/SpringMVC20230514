@@ -18,7 +18,7 @@ import spring.mvc.session17.entity.Product;
 @Controller
 @RequestMapping("/session17/product_master")
 
-public class ProductAndMaster {
+public class ProductAndMasterController {
 	private List<Product> products = new ArrayList<>();
 	private List<Master> masters = new ArrayList<>();
 
