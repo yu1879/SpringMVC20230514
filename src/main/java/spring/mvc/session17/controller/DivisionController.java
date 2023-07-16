@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/session17/divisin")
+@RequestMapping("/session17/division")
 public class DivisionController {
 
 }
